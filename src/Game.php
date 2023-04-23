@@ -8,6 +8,8 @@ use DomainException;
 
 class Game
 {
+    private const UNKNOWN_COMMAND_MESSAGE = 'unknown command';
+
     private array $players = [];
 
     public function process(string $input): string
@@ -29,7 +31,7 @@ class Game
             return $this->getPlayers();
         }
 
-        return 'unknown command';
+        return self::UNKNOWN_COMMAND_MESSAGE;
     }
 
     private function checkPlayerExists(string $name)
