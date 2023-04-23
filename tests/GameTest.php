@@ -102,13 +102,7 @@ class GameTest extends TestCase
     /** @test */
     public function it_can_move_player_back_when_overlap_win_space()
     {
-        $game = $this->initReadyGame('Pippo', 'Pluto');
-        $game->process('move Pippo 5, 5');
-        $game->process('move Pippo 5, 5');
-        $game->process('move Pippo 5, 5');
-        $game->process('move Pippo 5, 5');
-        $game->process('move Pippo 5, 5');
-        $game->process('move Pippo 5, 5');
+        $game = $this->initReadyGameWithFirstPlayerOnSixtiethSpace('Pippo', 'Pluto');
         $output = $game->process('move Pippo 3, 2');
 
         $this->assertSame('Pippo rolls 3, 2. Pippo moves from 60 to 63. Pippo bounces! Pippo returns to 61', $output);
@@ -117,13 +111,7 @@ class GameTest extends TestCase
     /** @test */
     public function it_can_notify_when_the_player_wins()
     {
-        $game = $this->initReadyGame('Pippo', 'Pluto');
-        $game->process('move Pippo 5, 5');
-        $game->process('move Pippo 5, 5');
-        $game->process('move Pippo 5, 5');
-        $game->process('move Pippo 5, 5');
-        $game->process('move Pippo 5, 5');
-        $game->process('move Pippo 5, 5');
+        $game = $this->initReadyGameWithFirstPlayerOnSixtiethSpace('Pippo', 'Pluto');
         $output = $game->process('move Pippo 1, 2');
 
         $this->assertSame('Pippo rolls 1, 2. Pippo moves from 60 to 63. Pippo Wins!!', $output);
@@ -132,13 +120,7 @@ class GameTest extends TestCase
     /** @test */
     public function it_cannot_continue_when_game_has_winner()
     {
-        $game = $this->initReadyGame('Pippo', 'Pluto');
-        $game->process('move Pippo 5, 5');
-        $game->process('move Pippo 5, 5');
-        $game->process('move Pippo 5, 5');
-        $game->process('move Pippo 5, 5');
-        $game->process('move Pippo 5, 5');
-        $game->process('move Pippo 5, 5');
+        $game = $this->initReadyGameWithFirstPlayerOnSixtiethSpace('Pippo', 'Pluto');
         $game->process('move Pippo 1, 2');
         $output = $game->process('move Pluto 1, 1');
 
@@ -152,6 +134,23 @@ class GameTest extends TestCase
             $game->process('add player ' . $player);
         }
         $game->process(' ');
+
+        return $game;
+    }
+
+    private function initReadyGameWithFirstPlayerOnSixtiethSpace(string ...$players): Game
+    {
+        $game = new Game();
+        foreach ($players as $player) {
+            $game->process('add player ' . $player);
+        }
+        $game->process(' ');
+
+        $firstPlayerName = current($players);
+        $movePlayerTenSpace = 'move ' . $firstPlayerName . ' 5, 5';
+        for ($timeToRun = 6; $timeToRun > 0; $timeToRun--) {
+            $game->process($movePlayerTenSpace);
+        }
 
         return $game;
     }
