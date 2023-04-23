@@ -6,9 +6,11 @@ namespace Kudashevs\GooseGameKata;
 
 class Player
 {
+    private const DEFAULT_POSITION = 0;
+
     private string $name;
 
-    private int $position = 0;
+    private int $position = self::DEFAULT_POSITION;
 
     public function __construct(string $name)
     {
