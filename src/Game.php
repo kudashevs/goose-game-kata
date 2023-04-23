@@ -16,6 +16,8 @@ class Game
     private const DICE_MIN = 1;
     private const DICE_MAX = 6;
 
+    private const ADD_PLAYER_REGEX = '/add player (?P<player>.+)$/iSU';
+
     private const UNKNOWN_COMMAND_MESSAGE = 'unknown command';
     private const LIST_PLAYERS_MESSAGE = 'players: %s';
     private const PLAYER_ALREADY_EXISTS_MESSAGE = '%s: already existing player';
@@ -43,7 +45,7 @@ class Game
             return self::HAS_WINNER_MESSAGE;
         }
 
-        if (preg_match('/add player (?P<player>.+)$/iSU', $input, $matches) === 1) {
+        if (preg_match(self::ADD_PLAYER_REGEX, $input, $matches) === 1) {
             return $this->processAddPlayer($matches['player']);
         }
 
