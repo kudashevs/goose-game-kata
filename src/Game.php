@@ -35,6 +35,10 @@ class Game
             return $this->processStart();
         }
 
+        if (preg_match('/move (?P<player>.+)\s+(?P<dice1>\d+),\s+(?P<dice2>\d+)$/iSu', $input, $matches) === 1) {
+            return $this->processMovePlayer($matches['player'], (int)$matches['dice1'], (int)$matches['dice2']);
+        }
+
         return self::UNKNOWN_COMMAND_MESSAGE;
     }
 
@@ -71,6 +75,28 @@ class Game
         if ($this->started === true) {
             throw new DomainException(
                 sprintf(self::ALREADY_STARTED_MESSAGE, $name)
+            );
+        }
+    }
+
+    private function processMovePlayer(string $player, int $dice1, int $dice2): string
+    {
+        try {
+            $this->checkPlayerDoesntExists($player);
+        } catch (DomainException $e) {
+            return $e->getMessage();
+        }
+    }
+
+    private function checkPlayerDoesntExists(string $name)
+    {
+        $playerNames = array_map(function ($player) {
+            return $player->getName();
+        }, $this->players);
+
+        if (! in_array($name, $playerNames)) {
+            throw new DomainException(
+                sprintf('You cannot move %s. The player does not exist.', $name)
             );
         }
     }

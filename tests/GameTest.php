@@ -62,6 +62,15 @@ class GameTest extends TestCase
         $this->assertSame('There is no enough participants', $output);
     }
 
+    /** @test */
+    public function it_cannot_move_an_unknown_player()
+    {
+        $game = $this->initReadyGame('Pippo', 'Pluto');
+        $output = $game->process('move Popo 2, 4');
+
+        $this->assertSame('You cannot move Popo. The player does not exist.', $output);
+    }
+
     private function initReadyGame(string ...$players): Game
     {
         $game = new Game();
