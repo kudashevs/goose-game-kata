@@ -40,4 +40,11 @@ class Player
     {
         return $this->previousPosition;
     }
+
+    public function updatePosition(int $position): void
+    {
+        $this->previousPosition = $this->currentPosition;
+
+        $this->currentPosition = $position;
+    }
 }

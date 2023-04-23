@@ -39,4 +39,14 @@ class PlayerTest extends TestCase
 
         $this->assertSame(5, $this->pippo->getCurrentPosition());
     }
+
+    /** @test */
+    public function it_can_update_a_current_position()
+    {
+        $this->pippo->move(2, 3);
+        $this->pippo->updatePosition(50);
+
+        $this->assertSame(50, $this->pippo->getCurrentPosition());
+        $this->assertSame(5, $this->pippo->getPreviousPosition());
+    }
 }
