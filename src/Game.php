@@ -8,6 +8,8 @@ use DomainException;
 
 class Game
 {
+    private const START_COMMAND = ' ';
+
     private const LIST_PLAYERS_MESSAGE = 'players: ';
     private const PLAYER_ALREADY_EXISTS_MESSAGE = ': already existing player';
     private const UNKNOWN_COMMAND_MESSAGE = 'unknown command';
@@ -25,7 +27,7 @@ class Game
             return $this->processAddPlayer($matches['player']);
         }
 
-        if ($input === ' ') {
+        if ($input === self::START_COMMAND) {
             return $this->processStart();
         }
 
