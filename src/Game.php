@@ -14,6 +14,7 @@ class Game
     private const PLAYER_ALREADY_EXISTS_MESSAGE = '%s: already existing player';
     private const NOT_ENOUGH_PLAYERS_MESSAGE = 'There is no enough participants';
     private const ALREADY_STARTED_MESSAGE = 'You cannot add %s. The game has already started.';
+    private const MOVE_UNKNOWN_PLAYER_MESSAGE = 'You cannot move %s. The player does not exist.';
     private const UNKNOWN_COMMAND_MESSAGE = 'unknown command';
 
     private bool $started = false;
@@ -96,7 +97,7 @@ class Game
 
         if (! in_array($name, $playerNames)) {
             throw new DomainException(
-                sprintf('You cannot move %s. The player does not exist.', $name)
+                sprintf(self::MOVE_UNKNOWN_PLAYER_MESSAGE, $name)
             );
         }
     }
