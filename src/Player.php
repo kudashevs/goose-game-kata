@@ -10,6 +10,8 @@ class Player
 
     private string $name;
 
+    private int $previousPosition = self::DEFAULT_POSITION;
+
     private int $position = self::DEFAULT_POSITION;
 
     public function __construct(string $name)
@@ -24,11 +26,18 @@ class Player
 
     public function move(int $first, int $second): void
     {
+        $this->previousPosition = $this->position;
+
         $this->position += ($first + $second);
     }
 
     public function getPosition(): int
     {
         return $this->position;
+    }
+
+    public function getPreviousPosition(): int
+    {
+        return $this->previousPosition;
     }
 }
