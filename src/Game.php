@@ -70,7 +70,7 @@ class Game
         }
     }
 
-    private function checkGameHasStarted(string $name)
+    private function checkGameHasStarted(string $name): void
     {
         if ($this->started === true) {
             throw new DomainException(
