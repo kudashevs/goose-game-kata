@@ -18,6 +18,10 @@ class Game
     private const ALREADY_STARTED_MESSAGE = 'You cannot add %s. The game has already started.';
     private const MOVE_UNKNOWN_PLAYER_MESSAGE = 'You cannot move %s. The player does not exist.';
 
+    private const SPACE_TITLES = [
+        0 => 'Start',
+    ];
+
     private bool $started = false;
 
     private array $players = [];
@@ -96,7 +100,7 @@ class Game
             $dice1,
             $dice2,
             $name,
-            'Start',
+            $this->getSpaceTitle(0),
             $player->getPosition(),
         );
     }
@@ -113,6 +117,15 @@ class Game
     private function getPlayerByName(string $name): Player
     {
         return $this->players[$name];
+    }
+
+    private function getSpaceTitle(int $position): string
+    {
+        if (array_key_exists($position, self::SPACE_TITLES)) {
+            return self::SPACE_TITLES[$position];
+        }
+
+        return (string)$position;
     }
 
     private function processStart(): string
