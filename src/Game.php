@@ -8,8 +8,9 @@ use DomainException;
 
 class Game
 {
-    private const UNKNOWN_COMMAND_MESSAGE = 'unknown command';
+    private const LIST_PLAYERS_MESSAGE = 'players: ';
     private const PLAYER_ALREADY_EXISTS_MESSAGE = ': already existing player';
+    private const UNKNOWN_COMMAND_MESSAGE = 'unknown command';
 
     private array $players = [];
 
@@ -51,7 +52,7 @@ class Game
 
     private function getPlayers(): string
     {
-        return 'players: ' . implode(', ', array_map(function ($player) {
+        return self::LIST_PLAYERS_MESSAGE . implode(', ', array_map(function ($player) {
                 return $player->getName();
             }, $this->players));
     }
