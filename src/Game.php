@@ -63,12 +63,10 @@ class Game
      */
     private function checkPlayerExists(string $name): void
     {
-        foreach ($this->players as $player) {
-            if ($player->getName() === $name) {
-                throw new DomainException(
-                    sprintf(self::PLAYER_ALREADY_EXISTS_MESSAGE, $name)
-                );
-            }
+        if (array_key_exists($name, $this->players)) {
+            throw new DomainException(
+                sprintf(self::PLAYER_ALREADY_EXISTS_MESSAGE, $name)
+            );
         }
     }
 
@@ -92,11 +90,7 @@ class Game
 
     private function checkPlayerDoesntExist(string $name)
     {
-        $playerNames = array_map(function ($player) {
-            return $player->getName();
-        }, $this->players);
-
-        if (! in_array($name, $playerNames)) {
+        if (! array_key_exists($name, $this->players)) {
             throw new DomainException(
                 sprintf(self::MOVE_UNKNOWN_PLAYER_MESSAGE, $name)
             );
@@ -116,7 +110,7 @@ class Game
 
     private function addPlayer(string $name): void
     {
-        $this->players[] = new Player($name);
+        $this->players[$name] = new Player($name);
     }
 
     private function getPlayers(): string
