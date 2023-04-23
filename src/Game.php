@@ -121,6 +121,26 @@ class Game
             );
         }
 
+        if ($this->isOverlap($player)) {
+            $oldPosition = $player->getPreviousPosition();
+            $overlap = $player->getCurrentPosition() - self::WIN_SPACE;
+            $newPosition = self::WIN_SPACE - $overlap;
+
+            $player->updatePosition($newPosition);
+
+            return sprintf(
+                self::MOVE_REGISTERED_PLAYER_MESSAGE . '. %s bounces! Pippo returns to %s',
+                $name,
+                $dice1,
+                $dice2,
+                $name,
+                $oldPosition,
+                self::WIN_SPACE,
+                $name,
+                $newPosition,
+            );
+        }
+
         return sprintf(
             self::MOVE_REGISTERED_PLAYER_MESSAGE,
             $name,
@@ -149,6 +169,11 @@ class Game
     private function isWinner(Player $player): bool
     {
         return $player->getCurrentPosition() === self::WIN_SPACE;
+    }
+
+    private function isOverlap(Player $player): bool
+    {
+        return $player->getCurrentPosition() > self::WIN_SPACE;
     }
 
     private function getSpaceTitle(int $position): string

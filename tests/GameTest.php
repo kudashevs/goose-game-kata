@@ -100,6 +100,21 @@ class GameTest extends TestCase
     }
 
     /** @test */
+    public function it_can_move_player_back_when_overlap_win_space()
+    {
+        $game = $this->initReadyGame('Pippo', 'Pluto');
+        $game->process('move Pippo 5, 5');
+        $game->process('move Pippo 5, 5');
+        $game->process('move Pippo 5, 5');
+        $game->process('move Pippo 5, 5');
+        $game->process('move Pippo 5, 5');
+        $game->process('move Pippo 5, 5');
+        $output = $game->process('move Pippo 3, 2');
+
+        $this->assertSame('Pippo rolls 3, 2. Pippo moves from 60 to 63. Pippo bounces! Pippo returns to 61', $output);
+    }
+
+    /** @test */
     public function it_can_notify_when_the_player_wins()
     {
         $game = $this->initReadyGame('Pippo', 'Pluto');
