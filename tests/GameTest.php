@@ -80,6 +80,25 @@ class GameTest extends TestCase
         $this->assertSame('Pippo rolls 4, 2. Pippo moves from Start to 6', $output);
     }
 
+    /** @test */
+    public function it_can_move_another_registered_player()
+    {
+        $game = $this->initReadyGame('Pippo', 'Pluto');
+        $output = $game->process('move Pluto 2, 2');
+
+        $this->assertSame('Pluto rolls 2, 2. Pluto moves from Start to 4', $output);
+    }
+
+    /** @test */
+    public function it_can_make_a_sequence_of_moves()
+    {
+        $game = $this->initReadyGame('Pippo', 'Pluto');
+        $game->process('move Pippo 4, 2');
+        $output = $game->process('move Pippo 2, 3');
+
+        $this->assertSame('Pippo rolls 2, 3. Pippo moves from 6 to 11', $output);
+    }
+
     private function initReadyGame(string ...$players): Game
     {
         $game = new Game();
