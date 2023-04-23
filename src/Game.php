@@ -23,7 +23,7 @@ class Game
         0 => 'Start',
     ];
 
-    private bool $started = false;
+    private bool $hasStarted = false;
 
     private array $players = [];
 
@@ -77,7 +77,7 @@ class Game
 
     private function checkGameHasStarted(string $name): void
     {
-        if ($this->started === true) {
+        if ($this->hasStarted === true) {
             throw new DomainException(
                 sprintf(self::ALREADY_STARTED_MESSAGE, $name)
             );
@@ -153,7 +153,7 @@ class Game
             return self::NOT_ENOUGH_PLAYERS_MESSAGE;
         }
 
-        $this->started = true;
+        $this->hasStarted = true;
 
         return '';
     }
