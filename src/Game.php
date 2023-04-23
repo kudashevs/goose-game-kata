@@ -13,6 +13,7 @@ class Game
     private const LIST_PLAYERS_MESSAGE = 'players: ';
     private const PLAYER_ALREADY_EXISTS_MESSAGE = '%s: already existing player';
     private const NOT_ENOUGH_PLAYERS_MESSAGE = 'There is no enough participants';
+    private const ALREADY_STARTED_MESSAGE = 'You cannot add %s. The game has already started.';
     private const UNKNOWN_COMMAND_MESSAGE = 'unknown command';
 
     private bool $started = false;
@@ -69,7 +70,7 @@ class Game
     {
         if ($this->started === true) {
             throw new DomainException(
-                sprintf('You cannot add %s. The game has already started.', $name)
+                sprintf(self::ALREADY_STARTED_MESSAGE, $name)
             );
         }
     }
