@@ -99,6 +99,21 @@ class GameTest extends TestCase
         $this->assertSame('Pippo rolls 2, 3. Pippo moves from 6 to 11', $output);
     }
 
+    /** @test */
+    public function it_can_notify_when_the_player_wins()
+    {
+        $game = $this->initReadyGame('Pippo', 'Pluto');
+        $game->process('move Pippo 5, 5');
+        $game->process('move Pippo 5, 5');
+        $game->process('move Pippo 5, 5');
+        $game->process('move Pippo 5, 5');
+        $game->process('move Pippo 5, 5');
+        $game->process('move Pippo 5, 5');
+        $output = $game->process('move Pippo 1, 2');
+
+        $this->assertSame('Pippo rolls 1, 2. Pippo moves from 60 to 63. Pippo Wins!!', $output);
+    }
+
     private function initReadyGame(string ...$players): Game
     {
         $game = new Game();

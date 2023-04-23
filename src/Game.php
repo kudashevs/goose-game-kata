@@ -18,6 +18,7 @@ class Game
     private const ALREADY_STARTED_MESSAGE = 'You cannot add %s. The game has already started.';
     private const MOVE_UNKNOWN_PLAYER_MESSAGE = 'You cannot move %s. The player does not exist.';
 
+    private const WIN_SPACE = 63;
     private const SPACE_NAMES = [
         0 => 'Start',
     ];
@@ -94,6 +95,19 @@ class Game
         $player = $this->getPlayerByName($name);
         $player->move($dice1, $dice2);
 
+        if ($this->isWinner($player)) {
+            return sprintf(
+                '%s rolls %s, %s. %s moves from %s to %s. %s Wins!!',
+                $name,
+                $dice1,
+                $dice2,
+                $name,
+                $this->getSpaceTitle($player->getPreviousPosition()),
+                $this->getSpaceTitle($player->getCurrentPosition()),
+                $name,
+            );
+        }
+
         return sprintf(
             '%s rolls %s, %s. %s moves from %s to %s',
             $name,
@@ -117,6 +131,11 @@ class Game
     private function getPlayerByName(string $name): Player
     {
         return $this->players[$name];
+    }
+
+    private function isWinner(Player $player): bool
+    {
+        return $player->getCurrentPosition() === self::WIN_SPACE;
     }
 
     private function getSpaceTitle(int $position): string
