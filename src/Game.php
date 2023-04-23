@@ -6,7 +6,7 @@ namespace Kudashevs\GooseGameKata;
 
 class Game
 {
-    private Player $player;
+    private array $players;
 
     public function process(string $input): string
     {
@@ -26,11 +26,13 @@ class Game
 
     private function addPlayer(string $name): void
     {
-        $this->player = new Player($name);
+        $this->players[] = new Player($name);
     }
 
     private function getPlayers(): string
     {
-        return 'players: ' . $this->player->getName();
+        return 'players: ' . implode(', ', array_map(function ($player) {
+                return $player->getName();
+            }, $this->players));
     }
 }

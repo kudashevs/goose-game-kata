@@ -15,4 +15,14 @@ class GameTest extends TestCase
 
         $this->assertSame('players: Pippo', $result);
     }
+
+    /** @test */
+    public function it_can_add_multiple_players()
+    {
+        $game = new Game();
+        $game->process('add player Pippo');
+        $result = $game->process('add player Pluto');
+
+        $this->assertSame('players: Pippo, Pluto', $result);
+    }
 }
