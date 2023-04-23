@@ -48,8 +48,11 @@ class Game
             return $this->processStart();
         }
 
-        if (preg_match('/move (?P<player>.+)\s+(?P<dice1>[1-6]),\s+(?P<dice2>[1-6])$/iSu', $input, $matches) === 1) {
-            return $this->processMovePlayer($matches['player'], (int)$matches['dice1'], (int)$matches['dice2']);
+        if (preg_match('/move (?P<player>.+)(\s+(?P<dice1>[1-6]),\s+(?P<dice2>[1-6]))?$/iSU', $input, $matches) === 1) {
+            $dice1 = isset($matches['dice1']) ? (int)$matches['dice1'] : random_int(1, 6);
+            $dice2 = isset($matches['dice2']) ? (int)$matches['dice2'] : random_int(1, 6);
+
+            return $this->processMovePlayer($matches['player'], $dice1, $dice2);
         }
 
         return self::UNKNOWN_COMMAND_MESSAGE;

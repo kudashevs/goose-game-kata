@@ -90,6 +90,15 @@ class GameTest extends TestCase
     }
 
     /** @test */
+    public function it_can_move_a_registered_player_automatically()
+    {
+        $game = $this->initReadyGame('Pippo', 'Pluto');
+        $output = $game->process('move Pluto');
+
+        $this->assertMatchesRegularExpression('/Pluto rolls [1-6], [1-6]. Pluto moves from Start to \d+/', $output);
+    }
+
+    /** @test */
     public function it_can_make_a_sequence_of_moves()
     {
         $game = $this->initReadyGame('Pippo', 'Pluto');
