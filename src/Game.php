@@ -22,18 +22,23 @@ class Game
     private function parseCommand($input): string
     {
         if (preg_match('/add player (?P<player>.+)$/iSU', $input, $matches) === 1) {
-            try {
-                $this->checkPlayerExists($matches['player']);
-            } catch (DomainException $e) {
-                return $e->getMessage();
-            }
-
-            $this->addPlayer($matches['player']);
-
-            return $this->getPlayers();
+            return $this->processAddPlayer($matches['player']);
         }
 
         return self::UNKNOWN_COMMAND_MESSAGE;
+    }
+
+    private function processAddPlayer($player): string
+    {
+        try {
+            $this->checkPlayerExists($player);
+        } catch (DomainException $e) {
+            return $e->getMessage();
+        }
+
+        $this->addPlayer($player);
+
+        return $this->getPlayers();
     }
 
     /**
