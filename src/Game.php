@@ -13,6 +13,8 @@ class Game
     private const SPACE_NAMES = [
         0 => 'Start',
     ];
+    private const DICE_MIN = 1;
+    private const DICE_MAX = 6;
 
     private const UNKNOWN_COMMAND_MESSAGE = 'unknown command';
     private const LIST_PLAYERS_MESSAGE = 'players: %s';
@@ -100,7 +102,7 @@ class Game
 
     private function prepareOrGenerateDice(string $number): int
     {
-        return is_numeric($number) ? (int)$number : random_int(1, 6);
+        return is_numeric($number) ? (int)$number : random_int(self::DICE_MIN, self::DICE_MAX);
     }
 
     private function processMovePlayer(string $name, int $dice1, int $dice2): string
