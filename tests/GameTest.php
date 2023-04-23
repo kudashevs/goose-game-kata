@@ -26,17 +26,17 @@ class GameTest extends TestCase
     public function it_can_add_multiple_players()
     {
         $this->game->process('add player Pippo');
-        $result = $this->game->process('add player Pluto');
+        $output = $this->game->process('add player Pluto');
 
-        $this->assertSame('players: Pippo, Pluto', $result);
+        $this->assertSame('players: Pippo, Pluto', $output);
     }
 
     /** @test */
     public function it_cannot_add_an_existing_player()
     {
         $this->game->process('add player Pippo');
-        $result = $this->game->process('add player Pippo');
+        $output = $this->game->process('add player Pippo');
 
-        $this->assertSame('Pippo: already existing player', $result);
+        $this->assertSame('Pippo: already existing player', $output);
     }
 }
