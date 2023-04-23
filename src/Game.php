@@ -84,13 +84,13 @@ class Game
     private function processMovePlayer(string $player, int $dice1, int $dice2): string
     {
         try {
-            $this->checkPlayerDoesntExists($player);
+            $this->checkPlayerDoesntExist($player);
         } catch (DomainException $e) {
             return $e->getMessage();
         }
     }
 
-    private function checkPlayerDoesntExists(string $name)
+    private function checkPlayerDoesntExist(string $name)
     {
         $playerNames = array_map(function ($player) {
             return $player->getName();
