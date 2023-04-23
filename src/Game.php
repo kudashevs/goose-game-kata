@@ -110,7 +110,7 @@ class Game
             $this->hasWinner = true;
 
             return sprintf(
-                '%s rolls %s, %s. %s moves from %s to %s. %s Wins!!',
+                self::MOVE_REGISTERED_PLAYER_MESSAGE . '. %s Wins!!',
                 $name,
                 $dice1,
                 $dice2,
