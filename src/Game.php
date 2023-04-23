@@ -49,8 +49,8 @@ class Game
         }
 
         if (preg_match('/move (?P<player>.+)(\s+(?P<dice1>[1-6]),\s+(?P<dice2>[1-6]))?$/iSU', $input, $matches) === 1) {
-            $dice1 = isset($matches['dice1']) ? (int)$matches['dice1'] : random_int(1, 6);
-            $dice2 = isset($matches['dice2']) ? (int)$matches['dice2'] : random_int(1, 6);
+            $dice1 = $this->prepareOrGenerateDice($matches['dice1'] ?? '');
+            $dice2 = $this->prepareOrGenerateDice($matches['dice2'] ?? '');
 
             return $this->processMovePlayer($matches['player'], $dice1, $dice2);
         }
@@ -96,6 +96,11 @@ class Game
                 sprintf(self::ALREADY_STARTED_MESSAGE, $name)
             );
         }
+    }
+
+    private function prepareOrGenerateDice(string $number): int
+    {
+        return is_numeric($number) ? (int)$number : random_int(1, 6);
     }
 
     private function processMovePlayer(string $name, int $dice1, int $dice2): string
