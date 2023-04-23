@@ -31,7 +31,7 @@ class Player
         $this->currentPosition += ($first + $second);
     }
 
-    public function getPosition(): int
+    public function getCurrentPosition(): int
     {
         return $this->currentPosition;
     }

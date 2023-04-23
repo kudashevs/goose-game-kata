@@ -101,7 +101,7 @@ class Game
             $dice2,
             $name,
             $this->getSpaceTitle($player->getPreviousPosition()),
-            $this->getSpaceTitle($player->getPosition()),
+            $this->getSpaceTitle($player->getCurrentPosition()),
         );
     }
 

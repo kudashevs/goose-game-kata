@@ -34,6 +34,6 @@ class PlayerTest extends TestCase
         $pippo = new Player('Pippo');
         $pippo->move(2, 3);
 
-        $this->assertSame(5, $pippo->getPosition());
+        $this->assertSame(5, $pippo->getCurrentPosition());
     }
 }
