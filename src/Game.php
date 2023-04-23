@@ -9,6 +9,7 @@ use DomainException;
 class Game
 {
     private const UNKNOWN_COMMAND_MESSAGE = 'unknown command';
+    private const PLAYER_ALREADY_EXISTS_MESSAGE = ': already existing player';
 
     private array $players = [];
 
@@ -38,7 +39,7 @@ class Game
     {
         foreach ($this->players as $player) {
             if ($player->getName() === $name) {
-                throw new DomainException($name . ': already existing player');
+                throw new DomainException($name . self::PLAYER_ALREADY_EXISTS_MESSAGE);
             }
         }
     }
