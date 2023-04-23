@@ -61,4 +61,15 @@ class GameTest extends TestCase
 
         $this->assertSame('There is no enough participants', $output);
     }
+
+    private function initReadyGame(string ...$players): Game
+    {
+        $game = new Game();
+        foreach ($players as $player) {
+            $game->process('add player ' . $player);
+        }
+        $game->process(' ');
+
+        return $game;
+    }
 }
