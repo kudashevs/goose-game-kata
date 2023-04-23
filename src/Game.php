@@ -35,7 +35,7 @@ class Game
         return self::UNKNOWN_COMMAND_MESSAGE;
     }
 
-    private function checkPlayerExists(string $name)
+    private function checkPlayerExists(string $name): void
     {
         foreach ($this->players as $player) {
             if ($player->getName() === $name) {
