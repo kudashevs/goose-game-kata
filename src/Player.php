@@ -8,11 +8,11 @@ class Player
 {
     private const DEFAULT_POSITION = 0;
 
-    private string $name;
-
     private int $previousPosition = self::DEFAULT_POSITION;
 
     private int $currentPosition = self::DEFAULT_POSITION;
+
+    private string $name;
 
     public function __construct(string $name)
     {
