@@ -21,6 +21,7 @@ class Game
 
     private const ALREADY_STARTED_MESSAGE = 'You cannot add %s. The game has already started.';
     private const MOVE_UNREGISTERED_PLAYER_MESSAGE = 'You cannot move %s. The player does not exist.';
+    private const MOVE_REGISTERED_PLAYER_MESSAGE = '%s rolls %s, %s. %s moves from %s to %s';
 
     private bool $hasStarted = false;
 
@@ -121,7 +122,7 @@ class Game
         }
 
         return sprintf(
-            '%s rolls %s, %s. %s moves from %s to %s',
+            self::MOVE_REGISTERED_PLAYER_MESSAGE,
             $name,
             $dice1,
             $dice2,
