@@ -86,6 +86,19 @@ class Game
         } catch (DomainException $e) {
             return $e->getMessage();
         }
+
+        $player = $this->getPlayerByName($name);
+        $player->move($dice1, $dice2);
+
+        return sprintf(
+            '%s rolls %s, %s. %s moves from %s to %s',
+            $name,
+            $dice1,
+            $dice2,
+            $name,
+            'Start',
+            $player->getPosition(),
+        );
     }
 
     private function checkPlayerDoesntExist(string $name)
@@ -95,6 +108,11 @@ class Game
                 sprintf(self::MOVE_UNKNOWN_PLAYER_MESSAGE, $name)
             );
         }
+    }
+
+    private function getPlayerByName(string $name): Player
+    {
+        return $this->players[$name];
     }
 
     private function processStart(): string

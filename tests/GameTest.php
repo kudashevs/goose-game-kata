@@ -71,6 +71,15 @@ class GameTest extends TestCase
         $this->assertSame('You cannot move Popo. The player does not exist.', $output);
     }
 
+    /** @test */
+    public function it_can_move_the_known_player()
+    {
+        $game = $this->initReadyGame('Pippo', 'Pluto');
+        $output = $game->process('move Pippo 4, 2');
+
+        $this->assertSame('Pippo rolls 4, 2. Pippo moves from Start to 6', $output);
+    }
+
     private function initReadyGame(string ...$players): Game
     {
         $game = new Game();
