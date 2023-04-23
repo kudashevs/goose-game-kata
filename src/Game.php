@@ -24,6 +24,7 @@ class Game
     private const ALREADY_STARTED_MESSAGE = 'You cannot add %s. The game has already started.';
     private const MOVE_UNREGISTERED_PLAYER_MESSAGE = 'You cannot move %s. The player does not exist.';
     private const MOVE_REGISTERED_PLAYER_MESSAGE = '%s rolls %s, %s. %s moves from %s to %s';
+    private const HAS_WINNER_MESSAGE = 'We have a winner. The game is over!';
 
     private bool $hasStarted = false;
 
@@ -39,7 +40,7 @@ class Game
     private function parseCommand($input): string
     {
         if ($this->checkGameHasWinner()) {
-            return 'We have a winner. The game is over!';
+            return self::HAS_WINNER_MESSAGE;
         }
 
         if (preg_match('/add player (?P<player>.+)$/iSU', $input, $matches) === 1) {
