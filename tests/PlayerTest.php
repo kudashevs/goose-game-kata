@@ -14,4 +14,13 @@ class PlayerTest extends TestCase
 
         $this->assertSame('Pippo', $pippo->getName());
     }
+
+    /** @test */
+    public function it_can_change_position()
+    {
+        $pippo = new Player('Pippo');
+        $pippo->move(2, 3);
+
+        $this->assertSame(5, $pippo->getPosition());
+    }
 }
