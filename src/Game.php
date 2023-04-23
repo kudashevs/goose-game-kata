@@ -15,6 +15,8 @@ class Game
     private const NOT_ENOUGH_PLAYERS_MESSAGE = 'There is no enough participants';
     private const UNKNOWN_COMMAND_MESSAGE = 'unknown command';
 
+    private bool $started = false;
+
     private array $players = [];
 
     public function process(string $input): string
@@ -39,6 +41,7 @@ class Game
     {
         try {
             $this->checkPlayerExists($player);
+            $this->checkGameHasStarted($player);
         } catch (DomainException $e) {
             return $e->getMessage();
         }
@@ -46,15 +49,6 @@ class Game
         $this->addPlayer($player);
 
         return $this->getPlayers();
-    }
-
-    private function processStart(): string
-    {
-        if (count($this->players) <= 1) {
-            return self::NOT_ENOUGH_PLAYERS_MESSAGE;
-        }
-
-        return '';
     }
 
     /**
@@ -67,6 +61,26 @@ class Game
                 throw new DomainException($name . self::PLAYER_ALREADY_EXISTS_MESSAGE);
             }
         }
+    }
+
+    private function checkGameHasStarted(string $name)
+    {
+        if ($this->started === true) {
+            throw new DomainException(
+                sprintf('You cannot add %s. The game has already started.', $name)
+            );
+        }
+    }
+
+    private function processStart(): string
+    {
+        if (count($this->players) <= 1) {
+            return self::NOT_ENOUGH_PLAYERS_MESSAGE;
+        }
+
+        $this->started = true;
+
+        return '';
     }
 
     private function addPlayer(string $name): void

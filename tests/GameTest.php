@@ -41,6 +41,18 @@ class GameTest extends TestCase
     }
 
     /** @test */
+    public function it_cannot_add_a_player_when_game_has_started()
+    {
+        $this->game->process('add player Pippo');
+        $this->game->process('add player Pluto');
+        $this->game->process(' ');
+
+        $output = $this->game->process('add player Pino');
+
+        $this->assertSame('You cannot add Pino. The game has already started.', $output);
+    }
+
+    /** @test */
     public function it_can_notify_when_no_enough_participants()
     {
         $this->game->process('add player Pippo');
