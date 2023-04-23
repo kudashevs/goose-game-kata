@@ -36,6 +36,9 @@ class Game
         return self::UNKNOWN_COMMAND_MESSAGE;
     }
 
+    /**
+     * @throws DomainException
+     */
     private function checkPlayerExists(string $name): void
     {
         foreach ($this->players as $player) {
