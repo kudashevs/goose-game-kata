@@ -25,6 +25,8 @@ class Game
 
     private bool $hasStarted = false;
 
+    private bool $hasWinner = false;
+
     private array $players = [];
 
     public function process(string $input): string
@@ -34,6 +36,10 @@ class Game
 
     private function parseCommand($input): string
     {
+        if ($this->checkGameHasWinner()) {
+            return 'We have a winner. The game is over!';
+        }
+
         if (preg_match('/add player (?P<player>.+)$/iSU', $input, $matches) === 1) {
             return $this->processAddPlayer($matches['player']);
         }
@@ -47,6 +53,11 @@ class Game
         }
 
         return self::UNKNOWN_COMMAND_MESSAGE;
+    }
+
+    private function checkGameHasWinner(): bool
+    {
+        return $this->hasWinner === true;
     }
 
     private function processAddPlayer($player): string
@@ -96,6 +107,8 @@ class Game
         $player->move($dice1, $dice2);
 
         if ($this->isWinner($player)) {
+            $this->hasWinner = true;
+
             return sprintf(
                 '%s rolls %s, %s. %s moves from %s to %s. %s Wins!!',
                 $name,

@@ -114,6 +114,22 @@ class GameTest extends TestCase
         $this->assertSame('Pippo rolls 1, 2. Pippo moves from 60 to 63. Pippo Wins!!', $output);
     }
 
+    /** @test */
+    public function it_cannot_continue_when_game_has_winner()
+    {
+        $game = $this->initReadyGame('Pippo', 'Pluto');
+        $game->process('move Pippo 5, 5');
+        $game->process('move Pippo 5, 5');
+        $game->process('move Pippo 5, 5');
+        $game->process('move Pippo 5, 5');
+        $game->process('move Pippo 5, 5');
+        $game->process('move Pippo 5, 5');
+        $game->process('move Pippo 1, 2');
+        $output = $game->process('move Pluto 1, 1');
+
+        $this->assertSame('We have a winner. The game is over!', $output);
+    }
+
     private function initReadyGame(string ...$players): Game
     {
         $game = new Game();
