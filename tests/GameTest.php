@@ -72,7 +72,7 @@ class GameTest extends TestCase
     }
 
     /** @test */
-    public function it_can_move_the_registered_player()
+    public function it_can_move_a_registered_player()
     {
         $game = $this->initReadyGame('Pippo', 'Pluto');
         $output = $game->process('move Pippo 4, 2');
