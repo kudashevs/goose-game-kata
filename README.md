@@ -115,3 +115,7 @@ assuming that the dice get 1 and 1
 when the user writes: "move Pippo"
 the system responds: "Pippo rolls 1, 1. Pippo moves from 15 to 17. On 17 there is Pluto, who returns to 15"
 ```
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
