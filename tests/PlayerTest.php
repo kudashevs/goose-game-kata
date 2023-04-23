@@ -7,33 +7,36 @@ use PHPUnit\Framework\TestCase;
 
 class PlayerTest extends TestCase
 {
+    private Player $pippo;
+
+    protected function setUp(): void
+    {
+        $this->pippo = new Player('Pippo');
+    }
+
     /** @test */
     public function it_can_retain_the_name()
     {
-        $pippo = new Player('Pippo');
-
-        $this->assertSame('Pippo', $pippo->getName());
+        $this->assertSame('Pippo', $this->pippo->getName());
     }
 
     /** @test */
     public function it_can_return_previous_position()
     {
-        $pippo = new Player('Pippo');
-        $pippo->move(1, 1);
+        $this->pippo->move(1, 1);
 
-        $this->assertSame(0, $pippo->getPreviousPosition());
+        $this->assertSame(0, $this->pippo->getPreviousPosition());
 
-        $pippo->move(1, 2);
+        $this->pippo->move(1, 2);
 
-        $this->assertSame(2, $pippo->getPreviousPosition());
+        $this->assertSame(2, $this->pippo->getPreviousPosition());
     }
 
     /** @test */
     public function it_can_return_new_position()
     {
-        $pippo = new Player('Pippo');
-        $pippo->move(2, 3);
+        $this->pippo->move(2, 3);
 
-        $this->assertSame(5, $pippo->getCurrentPosition());
+        $this->assertSame(5, $this->pippo->getCurrentPosition());
     }
 }
