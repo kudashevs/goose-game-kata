@@ -39,4 +39,14 @@ class GameTest extends TestCase
 
         $this->assertSame('Pippo: already existing player', $output);
     }
+
+    /** @test */
+    public function it_can_notify_when_no_enough_participants()
+    {
+        $this->game->process('add player Pippo');
+        $this->game->process('add player Pippo');
+        $output = $this->game->process(' ');
+
+        $this->assertSame('There is no enough participants', $output);
+    }
 }

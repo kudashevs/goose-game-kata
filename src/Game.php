@@ -25,6 +25,10 @@ class Game
             return $this->processAddPlayer($matches['player']);
         }
 
+        if ($input === ' ') {
+            return $this->processStart();
+        }
+
         return self::UNKNOWN_COMMAND_MESSAGE;
     }
 
@@ -39,6 +43,15 @@ class Game
         $this->addPlayer($player);
 
         return $this->getPlayers();
+    }
+
+    private function processStart(): string
+    {
+        if (count($this->players) <= 1) {
+            return 'There is no enough participants';
+        }
+
+        return '';
     }
 
     /**
