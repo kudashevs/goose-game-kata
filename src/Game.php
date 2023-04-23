@@ -17,6 +17,7 @@ class Game
     private const DICE_MAX = 6;
 
     private const ADD_PLAYER_REGEX = '/add player (?P<player>.+)$/iSU';
+    private const MOVE_PLAYER_REGEX = '/move (?P<player>.+)(\s+(?P<dice1>[' . self::DICE_MIN . '-' . self::DICE_MAX . ']),\s+(?P<dice2>[' . self::DICE_MIN . '-' . self::DICE_MAX . ']))?$/iSU';
 
     private const UNKNOWN_COMMAND_MESSAGE = 'unknown command';
     private const LIST_PLAYERS_MESSAGE = 'players: %s';
@@ -53,7 +54,7 @@ class Game
             return $this->processStart();
         }
 
-        if (preg_match('/move (?P<player>.+)(\s+(?P<dice1>[1-6]),\s+(?P<dice2>[1-6]))?$/iSU', $input, $matches) === 1) {
+        if (preg_match(self::MOVE_PLAYER_REGEX, $input, $matches) === 1) {
             $dice1 = $this->prepareOrGenerateDice($matches['dice1'] ?? '');
             $dice2 = $this->prepareOrGenerateDice($matches['dice2'] ?? '');
 
