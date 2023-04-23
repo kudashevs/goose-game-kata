@@ -1,0 +1,34 @@
+{
+    "name": "kudashevs/goose-game-kata",
+    "description": "A solution of the Goose Game kata.",
+    "type": "project",
+    "keywords": [
+        "php",
+        "kata",
+        "goose game",
+        "goose game kata"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sergey Kudashev",
+            "email": "kudashevs@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kudashevs\\GooseGameKata\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Kudashevs\\GooseGameKata\\Tests\\": "tests/"
+        }
+    }
+}
