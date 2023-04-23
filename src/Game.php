@@ -37,7 +37,7 @@ class Game
             return $this->processStart();
         }
 
-        if (preg_match('/move (?P<player>.+)\s+(?P<dice1>\d+),\s+(?P<dice2>\d+)$/iSu', $input, $matches) === 1) {
+        if (preg_match('/move (?P<player>.+)\s+(?P<dice1>[1-6]),\s+(?P<dice2>[1-6])$/iSu', $input, $matches) === 1) {
             return $this->processMovePlayer($matches['player'], (int)$matches['dice1'], (int)$matches['dice2']);
         }
 
