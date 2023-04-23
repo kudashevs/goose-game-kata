@@ -16,7 +16,7 @@ class Game
     private const UNKNOWN_COMMAND_MESSAGE = 'unknown command';
 
     private const ALREADY_STARTED_MESSAGE = 'You cannot add %s. The game has already started.';
-    private const MOVE_UNKNOWN_PLAYER_MESSAGE = 'You cannot move %s. The player does not exist.';
+    private const MOVE_UNREGISTERED_PLAYER_MESSAGE = 'You cannot move %s. The player does not exist.';
 
     private const WIN_SPACE = 63;
     private const SPACE_NAMES = [
@@ -136,7 +136,7 @@ class Game
     {
         if (! array_key_exists($name, $this->players)) {
             throw new DomainException(
-                sprintf(self::MOVE_UNKNOWN_PLAYER_MESSAGE, $name)
+                sprintf(self::MOVE_UNREGISTERED_PLAYER_MESSAGE, $name)
             );
         }
     }
