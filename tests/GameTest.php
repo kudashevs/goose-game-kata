@@ -63,7 +63,7 @@ class GameTest extends TestCase
     }
 
     /** @test */
-    public function it_cannot_move_an_unknown_player()
+    public function it_cannot_move_an_unregistered_player()
     {
         $game = $this->initReadyGame('Pippo', 'Pluto');
         $output = $game->process('move Popo 2, 4');
