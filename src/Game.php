@@ -11,7 +11,7 @@ class Game
     private const START_COMMAND = ' ';
 
     private const LIST_PLAYERS_MESSAGE = 'players: ';
-    private const PLAYER_ALREADY_EXISTS_MESSAGE = ': already existing player';
+    private const PLAYER_ALREADY_EXISTS_MESSAGE = '%s: already existing player';
     private const NOT_ENOUGH_PLAYERS_MESSAGE = 'There is no enough participants';
     private const UNKNOWN_COMMAND_MESSAGE = 'unknown command';
 
@@ -58,7 +58,9 @@ class Game
     {
         foreach ($this->players as $player) {
             if ($player->getName() === $name) {
-                throw new DomainException($name . self::PLAYER_ALREADY_EXISTS_MESSAGE);
+                throw new DomainException(
+                    sprintf(self::PLAYER_ALREADY_EXISTS_MESSAGE, $name)
+                );
             }
         }
     }
