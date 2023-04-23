@@ -79,10 +79,10 @@ class Game
         }
     }
 
-    private function processMovePlayer(string $player, int $dice1, int $dice2): string
+    private function processMovePlayer(string $name, int $dice1, int $dice2): string
     {
         try {
-            $this->checkPlayerDoesntExist($player);
+            $this->checkPlayerDoesntExist($name);
         } catch (DomainException $e) {
             return $e->getMessage();
         }
