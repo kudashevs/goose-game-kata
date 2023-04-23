@@ -29,7 +29,7 @@ class PlayerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_change_position()
+    public function it_can_return_new_position()
     {
         $pippo = new Player('Pippo');
         $pippo->move(2, 3);
