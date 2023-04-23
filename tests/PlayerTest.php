@@ -21,7 +21,7 @@ class PlayerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_return_previous_position()
+    public function it_can_return_a_previous_position()
     {
         $this->pippo->move(1, 1);
 
@@ -33,7 +33,7 @@ class PlayerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_return_new_position()
+    public function it_can_return_a_new_position()
     {
         $this->pippo->move(2, 3);
 
