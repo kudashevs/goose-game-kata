@@ -12,6 +12,7 @@ class Game
 
     private const LIST_PLAYERS_MESSAGE = 'players: ';
     private const PLAYER_ALREADY_EXISTS_MESSAGE = ': already existing player';
+    private const NOT_ENOUGH_PLAYERS_MESSAGE = 'There is no enough participants';
     private const UNKNOWN_COMMAND_MESSAGE = 'unknown command';
 
     private array $players = [];
@@ -50,7 +51,7 @@ class Game
     private function processStart(): string
     {
         if (count($this->players) <= 1) {
-            return 'There is no enough participants';
+            return self::NOT_ENOUGH_PLAYERS_MESSAGE;
         }
 
         return '';
