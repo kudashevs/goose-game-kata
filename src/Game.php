@@ -18,7 +18,7 @@ class Game
     private const ALREADY_STARTED_MESSAGE = 'You cannot add %s. The game has already started.';
     private const MOVE_UNKNOWN_PLAYER_MESSAGE = 'You cannot move %s. The player does not exist.';
 
-    private const SPACE_TITLES = [
+    private const SPACE_NAMES = [
         0 => 'Start',
     ];
 
@@ -121,8 +121,8 @@ class Game
 
     private function getSpaceTitle(int $position): string
     {
-        if (array_key_exists($position, self::SPACE_TITLES)) {
-            return self::SPACE_TITLES[$position];
+        if (array_key_exists($position, self::SPACE_NAMES)) {
+            return self::SPACE_NAMES[$position];
         }
 
         return (string)$position;
