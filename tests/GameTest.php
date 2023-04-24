@@ -75,9 +75,9 @@ class GameTest extends TestCase
     public function it_can_move_a_registered_player()
     {
         $game = $this->initReadyGame('Pippo', 'Pluto');
-        $output = $game->process('move Pippo 4, 2');
+        $output = $game->process('move Pippo 4, 1');
 
-        $this->assertSame('Pippo rolls 4, 2. Pippo moves from Start to 6', $output);
+        $this->assertSame('Pippo rolls 4, 1. Pippo moves from Start to 5', $output);
     }
 
     /** @test */
@@ -99,13 +99,23 @@ class GameTest extends TestCase
     }
 
     /** @test */
+    public function it_can_handle_the_bridge()
+    {
+        $game = $this->initReadyGame('Pippo', 'Pluto');
+        $game->process('move Pippo 2, 2');
+        $output = $game->process('move Pippo 1, 1');
+
+        $this->assertSame('Pippo rolls 1, 1. Pippo moves from 4 to The Bridge. Pippo jumps to 12', $output);
+    }
+
+    /** @test */
     public function it_can_make_a_sequence_of_moves()
     {
         $game = $this->initReadyGame('Pippo', 'Pluto');
-        $game->process('move Pippo 4, 2');
+        $game->process('move Pippo 4, 1');
         $output = $game->process('move Pippo 2, 3');
 
-        $this->assertSame('Pippo rolls 2, 3. Pippo moves from 6 to 11', $output);
+        $this->assertSame('Pippo rolls 2, 3. Pippo moves from 5 to 10', $output);
     }
 
     /** @test */

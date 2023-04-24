@@ -10,8 +10,12 @@ class Game
 {
     private const START_COMMAND = ' ';
     private const WIN_SPACE = 63;
+    private const BRIDGE_SPACE = 6;
+    private const BRIDGE_JUMP_TO = 12;
+
     private const SPACE_NAMES = [
         0 => 'Start',
+        6 => 'The Bridge',
     ];
     private const DICE_MIN = 1;
     private const DICE_MAX = 6;
@@ -135,6 +139,25 @@ class Game
             );
         }
 
+        if ($this->isBridge($player)) {
+            $oldPosition = $player->getPreviousPosition();
+            $newPosition = $player->getCurrentPosition();
+
+            $player->updatePosition(self::BRIDGE_JUMP_TO);
+
+            return sprintf(
+                self::MOVE_REGISTERED_PLAYER_MESSAGE . '. %s jumps to %s',
+                $name,
+                $dice1,
+                $dice2,
+                $name,
+                $this->getSpaceTitle($oldPosition),
+                $this->getSpaceTitle($newPosition),
+                $name,
+                self::BRIDGE_JUMP_TO,
+            );
+        }
+
         if ($this->isOverlap($player)) {
             $oldPosition = $player->getPreviousPosition();
             $overlap = $player->getCurrentPosition() - self::WIN_SPACE;
@@ -183,6 +206,11 @@ class Game
     private function isWinner(Player $player): bool
     {
         return $player->getCurrentPosition() === self::WIN_SPACE;
+    }
+
+    private function isBridge(Player $player): bool
+    {
+        return $player->getCurrentPosition() === self::BRIDGE_SPACE;
     }
 
     private function isOverlap(Player $player): bool
