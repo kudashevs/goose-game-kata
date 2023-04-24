@@ -30,7 +30,8 @@ class Game
     private const NOT_ENOUGH_PLAYERS_MESSAGE = 'There is no enough participants';
 
     private const HAS_STARTED_MESSAGE = 'You cannot add %s. The game has already started.';
-    private const MOVE_UNREGISTERED_PLAYER_MESSAGE = 'You cannot move %s. The player does not exist.';
+    private const CANNOT_MOVE_PLAYER = 'Cannot move %s';
+    private const UNREGISTERED_PLAYER_MESSAGE = '. The player is not registered';
     private const MOVE_REGISTERED_PLAYER_MESSAGE = '%s rolls %s, %s. %s moves from %s to %s';
     private const PLAYER_WINS_MESSAGE = '. %s Wins!!';
     private const OVERLAP_JUMP_BACK_MESSAGE = '. %s bounces! Pippo returns to %s';
@@ -130,7 +131,7 @@ class Game
         try {
             $this->checkPlayerDoesntExist($name);
         } catch (DomainException $e) {
-            return $e->getMessage();
+            return sprintf(self::CANNOT_MOVE_PLAYER, $name) . $e->getMessage();
         }
 
         $player = $this->getPlayerByName($name);
@@ -225,7 +226,7 @@ class Game
     {
         if (! array_key_exists($name, $this->players)) {
             throw new DomainException(
-                sprintf(self::MOVE_UNREGISTERED_PLAYER_MESSAGE, $name)
+                sprintf(self::UNREGISTERED_PLAYER_MESSAGE, $name)
             );
         }
     }

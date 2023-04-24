@@ -69,7 +69,7 @@ class GameTest extends TestCase
         $game = $this->initReadyGame('Pippo', 'Pluto');
         $output = $game->process('move Popo 2, 4');
 
-        $this->assertSame('You cannot move Popo. The player does not exist.', $output);
+        $this->assertSame('Cannot move Popo. The player is not registered', $output);
     }
 
     /** @test */
