@@ -143,17 +143,16 @@ class Game
         $player->move($dice1, $dice2);
 
         if ($this->isWinner($player)) {
-            $this->hasWinner = true;
+            $winnerMessage = $this->processWinner($player);
 
             return sprintf(
-                self::MOVE_REGISTERED_PLAYER_MESSAGE . self::PLAYER_WINS_MESSAGE,
+                self::MOVE_REGISTERED_PLAYER_MESSAGE . $winnerMessage,
                 $name,
                 $dice1,
                 $dice2,
                 $name,
                 $this->getSpaceTitle($player->getPreviousPosition()),
                 $this->getSpaceTitle($player->getCurrentPosition()),
-                $name,
             );
         }
 
@@ -267,6 +266,13 @@ class Game
     private function isWinner(Player $player): bool
     {
         return $player->getCurrentPosition() === self::WIN_SPACE;
+    }
+
+    private function processWinner(Player $player): string
+    {
+        $this->hasWinner = true;
+
+        return sprintf(self::PLAYER_WINS_MESSAGE, $player->getName());
     }
 
     private function isBridge(Player $player): bool
