@@ -195,10 +195,7 @@ class Game
 
         if ($this->isOverlap($player)) {
             $oldPosition = $player->getPreviousPosition();
-            $overlap = $player->getCurrentPosition() - self::WIN_SPACE;
-            $newPosition = self::WIN_SPACE - $overlap;
-
-            $overlapMessage = $this->processOverlap($player, $newPosition);
+            $overlapMessage = $this->processOverlap($player);
 
             return sprintf(
                 self::MOVE_REGISTERED_PLAYER_MESSAGE . $overlapMessage,
@@ -208,8 +205,6 @@ class Game
                 $name,
                 $oldPosition,
                 self::WIN_SPACE,
-                $name,
-                $newPosition,
             );
         }
 
@@ -302,8 +297,11 @@ class Game
         return $player->getCurrentPosition() > self::WIN_SPACE;
     }
 
-    private function processOverlap(Player $player, int $newPosition): string
+    private function processOverlap(Player $player): string
     {
+        $overlap = $player->getCurrentPosition() - self::WIN_SPACE;
+        $newPosition = self::WIN_SPACE - $overlap;
+
         $player->updatePosition($newPosition);
 
         return sprintf(self::OVERLAP_JUMP_BACK_MESSAGE, $player->getName(), $newPosition);
