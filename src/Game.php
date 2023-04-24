@@ -113,6 +113,9 @@ class Game
         }
     }
 
+    /**
+     * @throws DomainException
+     */
     private function checkGameHasStarted(string $name): void
     {
         if ($this->hasStarted === true) {
@@ -224,6 +227,9 @@ class Game
         );
     }
 
+    /**
+     * @throws DomainException
+     */
     private function checkPlayerDoesntExist(string $name): void
     {
         if (! array_key_exists($name, $this->players)) {
