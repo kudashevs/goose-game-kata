@@ -111,7 +111,7 @@ class GameTest extends TestCase
         $game->updateDiceRoller($rollerMock);
         $output = $game->process('move Pluto');
 
-        $this->assertMatchesRegularExpression('/Pluto rolls 2, 2. Pluto moves from Start to 4/', $output);
+        $this->assertSame('Pluto rolls 2, 2. Pluto moves from Start to 4', $output);
     }
 
     /** @test */
