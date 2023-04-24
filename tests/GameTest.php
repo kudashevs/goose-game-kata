@@ -76,9 +76,9 @@ class GameTest extends TestCase
     public function it_can_move_a_registered_player()
     {
         $game = $this->initReadyGame('Pippo', 'Pluto');
-        $output = $game->process('move Pippo 4, 1');
+        $output = $game->process('move Pippo 4, 3');
 
-        $this->assertSame('Pippo rolls 4, 1. Pippo moves from Start to 5', $output);
+        $this->assertSame('Pippo rolls 4, 3. Pippo moves from Start to 7', $output);
     }
 
     /** @test */
@@ -116,13 +116,32 @@ class GameTest extends TestCase
     }
 
     /** @test */
+    public function it_can_handle_the_goose_single_jump()
+    {
+        $rollerMock = $this->createMock(DiceRoller::class);
+        $rollerMock->expects($this->exactly(2))
+            ->method('roll')
+            ->willReturn(1);
+
+        $game = $this->initReadyGame('Pippo', 'Pluto');
+        $game->updateDiceRoller($rollerMock);
+        $game->process('move Pippo 1, 2');
+        $output = $game->process('move Pippo');
+
+        $this->assertSame(
+            'Pippo rolls 1, 1. Pippo moves from 3 to 5, The Goose. Pippo moves again and goes to 7',
+            $output
+        );
+    }
+
+    /** @test */
     public function it_can_make_a_sequence_of_moves()
     {
         $game = $this->initReadyGame('Pippo', 'Pluto');
-        $game->process('move Pippo 4, 1');
+        $game->process('move Pippo 4, 3');
         $output = $game->process('move Pippo 2, 3');
 
-        $this->assertSame('Pippo rolls 2, 3. Pippo moves from 5 to 10', $output);
+        $this->assertSame('Pippo rolls 2, 3. Pippo moves from 7 to 12', $output);
     }
 
     /** @test */

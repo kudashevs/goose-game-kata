@@ -12,6 +12,7 @@ class Game
     private const WIN_SPACE = 63;
     private const BRIDGE_SPACE = 6;
     private const BRIDGE_JUMP_TO = 12;
+    private const GOOSE_SPACES = [5, 9, 14, 18, 23, 27];
 
     private const SPACE_NAMES = [
         0 => 'Start',
@@ -165,6 +166,26 @@ class Game
             );
         }
 
+        if ($this->isGoose($player)) {
+            $oldPosition = $player->getPreviousPosition();
+            $newPosition = $player->getCurrentPosition();
+            $jumpPosition = $newPosition + ($newPosition - $oldPosition);
+
+            $player->updatePosition($jumpPosition);
+
+            return sprintf(
+                '%s rolls %s, %s. %s moves from %s to %s, The Goose. %s moves again and goes to %s',
+                $name,
+                $dice1,
+                $dice2,
+                $name,
+                $this->getSpaceTitle($oldPosition),
+                $this->getSpaceTitle($newPosition),
+                $name,
+                $jumpPosition,
+            );
+        }
+
         if ($this->isOverlap($player)) {
             $oldPosition = $player->getPreviousPosition();
             $overlap = $player->getCurrentPosition() - self::WIN_SPACE;
@@ -218,6 +239,11 @@ class Game
     private function isBridge(Player $player): bool
     {
         return $player->getCurrentPosition() === self::BRIDGE_SPACE;
+    }
+
+    private function isGoose(Player $player)
+    {
+        return in_array($player->getCurrentPosition(), self::GOOSE_SPACES);
     }
 
     private function isOverlap(Player $player): bool
