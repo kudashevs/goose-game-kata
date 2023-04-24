@@ -221,7 +221,7 @@ class Game
         );
     }
 
-    private function checkPlayerDoesntExist(string $name)
+    private function checkPlayerDoesntExist(string $name): void
     {
         if (! array_key_exists($name, $this->players)) {
             throw new DomainException(
