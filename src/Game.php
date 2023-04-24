@@ -33,6 +33,7 @@ class Game
     private const MOVE_UNREGISTERED_PLAYER_MESSAGE = 'You cannot move %s. The player does not exist.';
     private const MOVE_REGISTERED_PLAYER_MESSAGE = '%s rolls %s, %s. %s moves from %s to %s';
     private const OVERLAP_BOUNCE_BACK_MESSAGE = self::MOVE_REGISTERED_PLAYER_MESSAGE . '. %s bounces! Pippo returns to %s';
+    private const BRIDGE_JUMP_MESSAGE = self::MOVE_REGISTERED_PLAYER_MESSAGE . '. %s jumps to %s';
     private const HAS_WINNER_MESSAGE = 'We have a winner. The game is over!';
 
     private bool $hasStarted = false;
@@ -155,7 +156,7 @@ class Game
             $player->updatePosition(self::BRIDGE_JUMP_TO);
 
             return sprintf(
-                self::MOVE_REGISTERED_PLAYER_MESSAGE . '. %s jumps to %s',
+                self::BRIDGE_JUMP_MESSAGE,
                 $name,
                 $dice1,
                 $dice2,
