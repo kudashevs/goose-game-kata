@@ -278,7 +278,7 @@ class Game
         return sprintf(self::BRIDGE_JUMP_MESSAGE, $player->getName(), self::BRIDGE_JUMP_TO);
     }
 
-    private function isGoose(Player $player)
+    private function isGoose(Player $player): bool
     {
         return in_array($player->getCurrentPosition(), self::GOOSE_SPACES);
     }
