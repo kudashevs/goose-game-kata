@@ -160,18 +160,16 @@ class Game
             $oldPosition = $player->getPreviousPosition();
             $newPosition = $player->getCurrentPosition();
 
-            $player->updatePosition(self::BRIDGE_JUMP_TO);
+            $bridgeMessage = $this->processBridge($player);
 
             return sprintf(
-                self::MOVE_REGISTERED_PLAYER_MESSAGE . self::BRIDGE_JUMP_MESSAGE,
+                self::MOVE_REGISTERED_PLAYER_MESSAGE . $bridgeMessage,
                 $name,
                 $dice1,
                 $dice2,
                 $name,
                 $this->getSpaceTitle($oldPosition),
                 $this->getSpaceTitle($newPosition),
-                $name,
-                self::BRIDGE_JUMP_TO,
             );
         }
 
@@ -278,6 +276,13 @@ class Game
     private function isBridge(Player $player): bool
     {
         return $player->getCurrentPosition() === self::BRIDGE_SPACE;
+    }
+
+    private function processBridge(Player $player): string
+    {
+        $player->updatePosition(self::BRIDGE_JUMP_TO);
+
+        return sprintf(self::BRIDGE_JUMP_MESSAGE, $player->getName(), self::BRIDGE_JUMP_TO);
     }
 
     private function isGoose(Player $player)
