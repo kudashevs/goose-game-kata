@@ -13,6 +13,11 @@ composer install
 php bin/goose-game.php
 ```
 
+If you want to make sure that everything works as expected, you can run the unit tests.
+```bash
+composer test
+```
+
 ## Features
 
 ### 1. Add players
