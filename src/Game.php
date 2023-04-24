@@ -22,7 +22,7 @@ class Game
     private const DICE_MAX = 6;
 
     private const ADD_PLAYER_REGEX = '/add player (?P<player>.+)$/iSU';
-    private const MOVE_PLAYER_REGEX = '/move (?P<player>.+)(\s+(?P<dice1>[' . self::DICE_MIN . '-' . self::DICE_MAX . ']),\s+(?P<dice2>[' . self::DICE_MIN . '-' . self::DICE_MAX . ']))?$/iSU';
+    private const MOVE_PLAYER_REGEX = '/move (?P<player>.+)(\s+(?P<dice1>\d),\s+(?P<dice2>\d))?$/iSU';
 
     private const UNKNOWN_COMMAND_MESSAGE = 'unknown command';
     private const LIST_PLAYERS_MESSAGE = 'players: %s';
@@ -32,6 +32,7 @@ class Game
     private const HAS_STARTED_MESSAGE = 'You cannot add %s. The game has already started.';
     private const CANNOT_MOVE_PLAYER = 'Cannot move %s';
     private const UNREGISTERED_PLAYER_MESSAGE = '. The player is not registered';
+    private const INCORRECT_DICE_MESSAGE = '. Incorrect dice value%s %s';
     private const MOVE_REGISTERED_PLAYER_MESSAGE = '%s rolls %s, %s. %s moves from %s to %s';
     private const PLAYER_WINS_MESSAGE = '. %s Wins!!';
     private const OVERLAP_JUMP_BACK_MESSAGE = '. %s bounces! Pippo returns to %s';
@@ -130,6 +131,7 @@ class Game
     {
         try {
             $this->checkPlayerDoesntExist($name);
+            $this->checkValidDice($dice1, $dice2);
         } catch (DomainException $e) {
             return sprintf(self::CANNOT_MOVE_PLAYER, $name) . $e->getMessage();
         }
@@ -227,6 +229,26 @@ class Game
         if (! array_key_exists($name, $this->players)) {
             throw new DomainException(
                 sprintf(self::UNREGISTERED_PLAYER_MESSAGE, $name)
+            );
+        }
+    }
+
+    /**
+     * @throws DomainException
+     */
+    private function checkValidDice(int $firstDice, int $secondDice): void
+    {
+        $incorrectValues = array_filter([$firstDice, $secondDice], function ($dice) {
+            return $dice < self::DICE_MIN || $dice > self::DICE_MAX;
+        });
+
+        if (count($incorrectValues) > 0) {
+            throw new DomainException(
+                sprintf(
+                    self::INCORRECT_DICE_MESSAGE,
+                    (count($incorrectValues) > 1) ? 's' : '',
+                    implode(', ', $incorrectValues),
+                )
             );
         }
     }

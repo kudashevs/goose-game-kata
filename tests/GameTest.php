@@ -91,6 +91,15 @@ class GameTest extends TestCase
     }
 
     /** @test */
+    public function it_can_notify_when_a_dice_value_is_wrong()
+    {
+        $game = $this->initReadyGame('Pippo', 'Pluto');
+        $output = $game->process('move Pluto 8, 8');
+
+        $this->assertSame('Cannot move Pluto. Incorrect dice values 8, 8', $output);
+    }
+
+    /** @test */
     public function it_can_move_a_registered_player_automatically()
     {
         $rollerMock = $this->createMock(DiceRoller::class);
