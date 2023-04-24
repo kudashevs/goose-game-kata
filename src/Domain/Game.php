@@ -59,7 +59,7 @@ class Game
         return $this->parseCommand($input);
     }
 
-    private function parseCommand($input): string
+    private function parseCommand(string $input): string
     {
         if ($this->checkGameHasWinner()) {
             return self::GAME_ALREADY_ENDED_MESSAGE;
