@@ -50,7 +50,7 @@ class GameTest extends TestCase
 
         $output = $this->game->process('add player Pino');
 
-        $this->assertSame('You cannot add Pino. The game has already started.', $output);
+        $this->assertSame('Cannot add Pino. The game has already started.', $output);
     }
 
     /** @test */
