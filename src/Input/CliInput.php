@@ -8,7 +8,7 @@ class CliInput implements InputInterface
 {
     public function readLine(): string
     {
-        $input = fgets(STDIN);
+        $input = (string)fgets(STDIN);
 
         /*
          * We want the input to be cleared from any new lines.
