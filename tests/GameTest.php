@@ -144,6 +144,30 @@ class GameTest extends TestCase
     }
 
     /** @test */
+    public function it_can_handle_the_goose_multiple_jumps()
+    {
+        $rollerMock = $this->createMock(DiceRoller::class);
+        $rollerMock->expects($this->exactly(2))
+            ->method('roll')
+            ->willReturn(2);
+
+        $game = $this->initReadyGame('Pippo', 'Pluto');
+        $game->updateDiceRoller($rollerMock);
+        $game->process('move Pippo 5, 5');
+        $output = $game->process('move Pippo');
+
+        $this->assertSame(
+            'Pippo rolls 2, 2. Pippo moves from 10 to 14, The Goose. Pippo moves again and goes to 18, The Goose. Pippo moves again and goes to 22',
+            $output
+        );
+
+        $game->process('move Pluto 1, 1');
+        $output = $game->process('move Pippo 2, 1');
+
+        $this->assertSame('Pippo rolls 2, 1. Pippo moves from 22 to 25', $output);
+    }
+
+    /** @test */
     public function it_can_make_a_sequence_of_moves()
     {
         $game = $this->initReadyGame('Pippo', 'Pluto');
