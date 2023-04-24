@@ -88,7 +88,7 @@ class Game
         return $this->hasWinner === true;
     }
 
-    private function processAddPlayer($player): string
+    private function processAddPlayer(string $player): string
     {
         try {
             $this->checkPlayerExists($player);
