@@ -45,6 +45,7 @@ class Game
 
     private bool $hasWinner = false;
 
+    /** @var array<string, Player> */
     private array $players = [];
 
     private DiceRoller $roller;
