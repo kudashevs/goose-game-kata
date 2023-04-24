@@ -1,6 +1,6 @@
 <?php
 
-namespace Kudashevs\GooseGameKata\Tests;
+namespace Kudashevs\GooseGameKata\Tests\Unit;
 
 use Kudashevs\GooseGameKata\DiceRoller;
 use Kudashevs\GooseGameKata\Game;
