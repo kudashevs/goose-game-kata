@@ -35,7 +35,7 @@ class Game
     private const CANNOT_MOVE_PLAYER = 'Cannot move %s';
     private const UNREGISTERED_PLAYER_MESSAGE = '. The player is not registered';
     private const INCORRECT_DICE_MESSAGE = '. Incorrect dice value%s %s';
-    private const MOVE_REGISTERED_PLAYER_MESSAGE = '%s rolls %s, %s. %s moves from %s to %s';
+    private const MOVE_PLAYER_MESSAGE = '%s rolls %s, %s. %s moves from %s to %s';
     private const PLAYER_WINS_MESSAGE = '. %s Wins!!';
     private const OVERLAP_JUMP_BACK_MESSAGE = '. %s bounces! Pippo returns to %s';
     private const BRIDGE_JUMP_MESSAGE = '. %s jumps to %s';
@@ -147,7 +147,7 @@ class Game
             $winnerMessage = $this->processWinner($player);
 
             return sprintf(
-                self::MOVE_REGISTERED_PLAYER_MESSAGE . $winnerMessage,
+                self::MOVE_PLAYER_MESSAGE . $winnerMessage,
                 $name,
                 $dice1,
                 $dice2,
@@ -164,7 +164,7 @@ class Game
             $bridgeMessage = $this->processBridge($player);
 
             return sprintf(
-                self::MOVE_REGISTERED_PLAYER_MESSAGE . $bridgeMessage,
+                self::MOVE_PLAYER_MESSAGE . $bridgeMessage,
                 $name,
                 $dice1,
                 $dice2,
@@ -181,7 +181,7 @@ class Game
             $gooseMessage = $this->processGoose($player);
 
             return sprintf(
-                self::MOVE_REGISTERED_PLAYER_MESSAGE . $gooseMessage,
+                self::MOVE_PLAYER_MESSAGE . $gooseMessage,
                 $name,
                 $dice1,
                 $dice2,
@@ -196,7 +196,7 @@ class Game
             $overlapMessage = $this->processOverlap($player);
 
             return sprintf(
-                self::MOVE_REGISTERED_PLAYER_MESSAGE . $overlapMessage,
+                self::MOVE_PLAYER_MESSAGE . $overlapMessage,
                 $name,
                 $dice1,
                 $dice2,
@@ -207,7 +207,7 @@ class Game
         }
 
         return sprintf(
-            self::MOVE_REGISTERED_PLAYER_MESSAGE,
+            self::MOVE_PLAYER_MESSAGE,
             $name,
             $dice1,
             $dice2,
