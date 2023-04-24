@@ -2,6 +2,7 @@
 
 namespace Kudashevs\GooseGameKata\Tests;
 
+use Kudashevs\GooseGameKata\DiceRoller;
 use Kudashevs\GooseGameKata\Game;
 use PHPUnit\Framework\TestCase;
 
@@ -92,10 +93,16 @@ class GameTest extends TestCase
     /** @test */
     public function it_can_move_a_registered_player_automatically()
     {
+        $rollerMock = $this->createMock(DiceRoller::class);
+        $rollerMock->expects($this->exactly(2))
+            ->method('roll')
+            ->willReturn(2);
+
         $game = $this->initReadyGame('Pippo', 'Pluto');
+        $game->updateDiceRoller($rollerMock);
         $output = $game->process('move Pluto');
 
-        $this->assertMatchesRegularExpression('/Pluto rolls [1-6], [1-6]. Pluto moves from Start to \d+/', $output);
+        $this->assertMatchesRegularExpression('/Pluto rolls 2, 2. Pluto moves from Start to 4/', $output);
     }
 
     /** @test */

@@ -39,6 +39,13 @@ class Game
 
     private array $players = [];
 
+    private DiceRoller $roller;
+
+    public function __construct()
+    {
+        $this->roller = new DiceRoller();
+    }
+
     public function process(string $input): string
     {
         return $this->parseCommand($input);
@@ -110,7 +117,7 @@ class Game
 
     private function prepareOrGenerateDice(string $number): int
     {
-        return is_numeric($number) ? (int)$number : random_int(self::DICE_MIN, self::DICE_MAX);
+        return is_numeric($number) ? (int)$number : $this->roller->roll(self::DICE_MIN, self::DICE_MAX);
     }
 
     private function processMovePlayer(string $name, int $dice1, int $dice2): string
@@ -251,5 +258,10 @@ class Game
                 return $player->getName();
             }, $this->players))
         );
+    }
+
+    public function updateDiceRoller(DiceRoller $roller): void
+    {
+        $this->roller = $roller;
     }
 }
