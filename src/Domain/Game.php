@@ -31,6 +31,7 @@ class Game
 
     private const GAME_START_MESSAGE = 'Start';
     private const GAME_ALREADY_STARTED_MESSAGE = 'Cannot add %s. The game has already started.';
+    private const GAME_ALREADY_ENDED_MESSAGE = 'We have a winner. The game is over!';
     private const CANNOT_MOVE_PLAYER = 'Cannot move %s';
     private const UNREGISTERED_PLAYER_MESSAGE = '. The player is not registered';
     private const INCORRECT_DICE_MESSAGE = '. Incorrect dice value%s %s';
@@ -39,7 +40,6 @@ class Game
     private const OVERLAP_JUMP_BACK_MESSAGE = '. %s bounces! Pippo returns to %s';
     private const BRIDGE_JUMP_MESSAGE = '. %s jumps to %s';
     private const GOOSE_JUMP_MESSAGE = ', The Goose. %s moves again and goes to %s';
-    private const HAS_WINNER_MESSAGE = 'We have a winner. The game is over!';
 
     private bool $hasStarted = false;
 
@@ -62,7 +62,7 @@ class Game
     private function parseCommand($input): string
     {
         if ($this->checkGameHasWinner()) {
-            return self::HAS_WINNER_MESSAGE;
+            return self::GAME_ALREADY_ENDED_MESSAGE;
         }
 
         if (preg_match(self::ADD_PLAYER_REGEX, $input, $matches) === 1) {
