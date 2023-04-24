@@ -228,7 +228,7 @@ class Game
     {
         if (! array_key_exists($name, $this->players)) {
             throw new DomainException(
-                sprintf(self::UNREGISTERED_PLAYER_MESSAGE, $name)
+                sprintf(self::UNREGISTERED_PLAYER_MESSAGE)
             );
         }
     }
