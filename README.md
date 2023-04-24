@@ -4,10 +4,11 @@ Goose game is a game where two or more players move pieces around a track by rol
 This kata has been invented by [Matteo Vaccari](https://github.com/xpmatteo), you can find the original slides [here](https://www.slideshare.net/pierodibello/il-dilettevole-giuoco-delloca-coding-dojo).
 
 ## Usage
-The game doesn't require any compilation. However, it requires a PHP interpreter to run.
-Clone the repository, then install all of the dependencies and run the application.
+The game doesn't require any compilation step. However, it requires a PHP interpreter to run.  
+Clone the repository, change directory, install all of the dependencies, and run the application.
 ```shell
 git clone https://github.com/kudashevs/goose-game-kata
+cd goose-game-kata
 composer install
 php bin/goose-game.php
 ```
