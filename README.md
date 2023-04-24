@@ -13,7 +13,7 @@ composer install
 bin/goose-game.php
 ```
 
-If you want to make sure that everything works as expected, you can run the unit tests.
+If you want to make sure that everything works as expected, you can run unit tests.
 ```bash
 composer test
 ```
