@@ -32,9 +32,9 @@ class Game
     private const HAS_STARTED_MESSAGE = 'You cannot add %s. The game has already started.';
     private const MOVE_UNREGISTERED_PLAYER_MESSAGE = 'You cannot move %s. The player does not exist.';
     private const MOVE_REGISTERED_PLAYER_MESSAGE = '%s rolls %s, %s. %s moves from %s to %s';
-    private const OVERLAP_BOUNCE_BACK_MESSAGE = self::MOVE_REGISTERED_PLAYER_MESSAGE . '. %s bounces! Pippo returns to %s';
-    private const BRIDGE_JUMP_MESSAGE = self::MOVE_REGISTERED_PLAYER_MESSAGE . '. %s jumps to %s';
-    private const GOOSE_SINGLE_JUMP_MESSAGE = self::MOVE_REGISTERED_PLAYER_MESSAGE . ', The Goose. %s moves again and goes to %s';
+    private const OVERLAP_BOUNCE_BACK_MESSAGE = '. %s bounces! Pippo returns to %s';
+    private const BRIDGE_JUMP_MESSAGE = '. %s jumps to %s';
+    private const GOOSE_SINGLE_JUMP_MESSAGE = ', The Goose. %s moves again and goes to %s';
     private const HAS_WINNER_MESSAGE = 'We have a winner. The game is over!';
 
     private bool $hasStarted = false;
@@ -157,7 +157,7 @@ class Game
             $player->updatePosition(self::BRIDGE_JUMP_TO);
 
             return sprintf(
-                self::BRIDGE_JUMP_MESSAGE,
+                self::MOVE_REGISTERED_PLAYER_MESSAGE . self::BRIDGE_JUMP_MESSAGE,
                 $name,
                 $dice1,
                 $dice2,
@@ -177,7 +177,7 @@ class Game
             $player->updatePosition($jumpPosition);
 
             return sprintf(
-                self::GOOSE_SINGLE_JUMP_MESSAGE,
+                self::MOVE_REGISTERED_PLAYER_MESSAGE . self::GOOSE_SINGLE_JUMP_MESSAGE,
                 $name,
                 $dice1,
                 $dice2,
@@ -197,7 +197,7 @@ class Game
             $player->updatePosition($newPosition);
 
             return sprintf(
-                self::OVERLAP_BOUNCE_BACK_MESSAGE,
+                self::MOVE_REGISTERED_PLAYER_MESSAGE . self::OVERLAP_BOUNCE_BACK_MESSAGE,
                 $name,
                 $dice1,
                 $dice2,
