@@ -10,7 +10,7 @@ Clone the repository, change directory, install all of the dependencies, and run
 git clone https://github.com/kudashevs/goose-game-kata
 cd goose-game-kata
 composer install
-php bin/goose-game.php
+bin/goose-game.php
 ```
 
 If you want to make sure that everything works as expected, you can run the unit tests.
