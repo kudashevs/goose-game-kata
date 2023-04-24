@@ -30,7 +30,7 @@ class Game
     private const NOT_ENOUGH_PLAYERS_MESSAGE = 'There is no enough participants';
 
     private const GAME_START_MESSAGE = 'Start';
-    private const HAS_STARTED_MESSAGE = 'Cannot add %s. The game has already started.';
+    private const GAME_ALREADY_STARTED_MESSAGE = 'Cannot add %s. The game has already started.';
     private const CANNOT_MOVE_PLAYER = 'Cannot move %s';
     private const UNREGISTERED_PLAYER_MESSAGE = '. The player is not registered';
     private const INCORRECT_DICE_MESSAGE = '. Incorrect dice value%s %s';
@@ -121,7 +121,7 @@ class Game
     {
         if ($this->hasStarted === true) {
             throw new DomainException(
-                sprintf(self::HAS_STARTED_MESSAGE, $name)
+                sprintf(self::GAME_ALREADY_STARTED_MESSAGE, $name)
             );
         }
     }
