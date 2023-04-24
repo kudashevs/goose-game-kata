@@ -178,10 +178,10 @@ class Game
             $newPosition = $player->getCurrentPosition();
             $jumpPosition = $newPosition + ($newPosition - $oldPosition);
 
-            $player->updatePosition($jumpPosition);
+            $gooseMessage = $this->processGoose($player, $jumpPosition);
 
             return sprintf(
-                self::MOVE_REGISTERED_PLAYER_MESSAGE . self::GOOSE_JUMP_MESSAGE,
+                self::MOVE_REGISTERED_PLAYER_MESSAGE . $gooseMessage,
                 $name,
                 $dice1,
                 $dice2,
@@ -288,6 +288,13 @@ class Game
     private function isGoose(Player $player)
     {
         return in_array($player->getCurrentPosition(), self::GOOSE_SPACES);
+    }
+
+    private function processGoose(Player $player, int $jumpPosition): string
+    {
+        $player->updatePosition($jumpPosition);
+
+        return sprintf(self::GOOSE_JUMP_MESSAGE, $player->getName(), $jumpPosition);
     }
 
     private function isOverlap(Player $player): bool
