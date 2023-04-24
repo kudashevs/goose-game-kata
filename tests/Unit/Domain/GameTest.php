@@ -1,9 +1,9 @@
 <?php
 
-namespace Kudashevs\GooseGameKata\Tests\Unit;
+namespace Kudashevs\GooseGameKata\Tests\Unit\Domain;
 
-use Kudashevs\GooseGameKata\DiceRoller;
-use Kudashevs\GooseGameKata\Game;
+use Kudashevs\GooseGameKata\Domain\DiceRoller;
+use Kudashevs\GooseGameKata\Domain\Game;
 use PHPUnit\Framework\TestCase;
 
 class GameTest extends TestCase

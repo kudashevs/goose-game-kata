@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kudashevs\GooseGameKata;
+namespace Kudashevs\GooseGameKata\Domain;
 
 use Exception;
 

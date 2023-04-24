@@ -1,8 +1,8 @@
 <?php
 
-namespace Kudashevs\GooseGameKata\Tests\Unit;
+namespace Kudashevs\GooseGameKata\Tests\Unit\Domain;
 
-use Kudashevs\GooseGameKata\Player;
+use Kudashevs\GooseGameKata\Domain\Player;
 use PHPUnit\Framework\TestCase;
 
 class PlayerTest extends TestCase

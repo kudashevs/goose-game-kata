@@ -1,8 +1,8 @@
 <?php
 
-namespace Kudashevs\GooseGameKata\Tests\Unit;
+namespace Kudashevs\GooseGameKata\Tests\Unit\Domain;
 
-use Kudashevs\GooseGameKata\DiceRoller;
+use Kudashevs\GooseGameKata\Domain\DiceRoller;
 use PHPUnit\Framework\TestCase;
 
 class DiceRollerTest extends TestCase
