@@ -34,6 +34,7 @@ class Game
     private const MOVE_REGISTERED_PLAYER_MESSAGE = '%s rolls %s, %s. %s moves from %s to %s';
     private const OVERLAP_BOUNCE_BACK_MESSAGE = self::MOVE_REGISTERED_PLAYER_MESSAGE . '. %s bounces! Pippo returns to %s';
     private const BRIDGE_JUMP_MESSAGE = self::MOVE_REGISTERED_PLAYER_MESSAGE . '. %s jumps to %s';
+    private const GOOSE_SINGLE_JUMP_MESSAGE = '%s rolls %s, %s. %s moves from %s to %s, The Goose. %s moves again and goes to %s';
     private const HAS_WINNER_MESSAGE = 'We have a winner. The game is over!';
 
     private bool $hasStarted = false;
@@ -176,7 +177,7 @@ class Game
             $player->updatePosition($jumpPosition);
 
             return sprintf(
-                '%s rolls %s, %s. %s moves from %s to %s, The Goose. %s moves again and goes to %s',
+                self::GOOSE_SINGLE_JUMP_MESSAGE,
                 $name,
                 $dice1,
                 $dice2,
