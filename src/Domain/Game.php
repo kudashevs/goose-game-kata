@@ -29,6 +29,7 @@ class Game
     private const PLAYER_ALREADY_EXISTS_MESSAGE = '%s: already existing player';
     private const NOT_ENOUGH_PLAYERS_MESSAGE = 'There is no enough participants';
 
+    private const GAME_START_MESSAGE = 'Start';
     private const HAS_STARTED_MESSAGE = 'Cannot add %s. The game has already started.';
     private const CANNOT_MOVE_PLAYER = 'Cannot move %s';
     private const UNREGISTERED_PLAYER_MESSAGE = '. The player is not registered';
@@ -326,7 +327,7 @@ class Game
 
         $this->hasStarted = true;
 
-        return '';
+        return self::GAME_START_MESSAGE;
     }
 
     private function addPlayer(string $name): void
